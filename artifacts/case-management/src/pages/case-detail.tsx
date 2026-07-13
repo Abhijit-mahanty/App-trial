@@ -89,14 +89,53 @@ export const CaseDetail = () => {
   const [isInteractionOpen, setIsInteractionOpen] = useState(false);
 
   const { data: caseData, isLoading: caseLoading } = useGetCase(caseId, {
-    query: { enabled: !!caseId }
+    query: { 
+      queryKey:
+      getGetCaseQueryKey(caseId),
+      enabled: !!caseId,
+    }
   });
   
   // Scoped queries
-  const { data: documents } = useListDocuments({ caseId }, { query: { enabled: !!caseId } });
-  const { data: deadlines } = useListDeadlines({ caseId }, { query: { enabled: !!caseId } });
-  const { data: tasks } = useListTasks({ caseId }, { query: { enabled: !!caseId } });
-  const { data: interactions } = useListInteractions({ caseId }, { query: { enabled: !!caseId } });
+  const { data: documents } = useListDocuments(
+  { caseId },
+  {
+    query: {
+      queryKey: getListDocumentsQueryKey({ caseId }),
+      enabled: !!caseId,
+    },
+  }
+);
+
+const { data: deadlines } = useListDeadlines(
+  { caseId },
+  {
+    query: {
+      queryKey: getListDeadlinesQueryKey({ caseId }),
+      enabled: !!caseId,
+    },
+  }
+);
+
+const { data: tasks } = useListTasks(
+  { caseId },
+  {
+    query: {
+      queryKey: getListTasksQueryKey({ caseId }),
+      enabled: !!caseId,
+    },
+  }
+);
+
+const { data: interactions } = useListInteractions(
+  { caseId },
+  {
+    query: {
+      queryKey: getListInteractionsQueryKey({ caseId }),
+      enabled: !!caseId,
+    },
+  }
+);
 
   const updateCase = useUpdateCase();
   const deleteCase = useDeleteCase();
