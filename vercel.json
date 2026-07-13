@@ -2,8 +2,5 @@
   "buildCommand": "pnpm install && pnpm --filter @workspace/mockup-sandbox build",
   "outputDirectory": "artifacts/mockup-sandbox/mockup-sandbox/dist",
   "framework": "vite",
-  "env": {
-    "PORT": "3000",
-    "BASE_PATH": "/"
-  }
+  
 }
